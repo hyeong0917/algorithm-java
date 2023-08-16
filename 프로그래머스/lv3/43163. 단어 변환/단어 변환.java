@@ -1,26 +1,28 @@
 import java.util.*;
 
 class Solution {
-    private boolean isConvertable(String src, String dst) {
-        char[] srcArr = src.toCharArray();
-        char[] dstArr = dst.toCharArray();
-        
-        int diff = 0;
-        for(int i = 0; i < srcArr.length; i++) {
-            if(srcArr[i] != dstArr[i]) diff++;
-        }
-        
-        return diff == 1;
-    }
-    
     private static class State {
-        public final String word;
-        public final int step;
+        private final String word;
+        private final int step;
         
-        private State(String word, int step) {
+        public State(String word, int step) {
             this.word = word;
             this.step = step;
         }
+    }
+    
+    private static boolean isConvertable(String s1, String s2) {
+        char[] c1 = s1.toCharArray();
+        char[] c2 = s2.toCharArray();
+        
+        int t = 0;
+        for(int i = 0; i < c1.length; i++) {
+            if(c1[i] != c2[i]) {
+                t++;
+            }
+        }
+        
+        return t == 1;
     }
     
     public int solution(String begin, String target, String[] words) {
@@ -47,7 +49,6 @@ class Solution {
                 queue.add(new State(next, state.step + 1));
             }
         }
-        
         return 0;
     }
 }
