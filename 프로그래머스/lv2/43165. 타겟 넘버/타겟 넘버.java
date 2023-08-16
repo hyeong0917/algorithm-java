@@ -10,6 +10,7 @@ class Solution {
             this.acc = acc;
         }
     }
+    
     public int solution(int[] numbers, int target) {
         Stack<State> s = new Stack<>();
         s.push(new State(0, 0));
@@ -24,8 +25,8 @@ class Solution {
                 continue;
             }
             
-            s.push(new State(state.index + 1, state.acc + numbers[state.index]));
             s.push(new State(state.index + 1, state.acc - numbers[state.index]));
+            s.push(new State(state.index + 1, state.acc + numbers[state.index]));
         }
         
         return count;
