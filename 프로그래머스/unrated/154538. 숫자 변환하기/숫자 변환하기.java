@@ -30,15 +30,9 @@ class Solution {
             
             if(state.acc > y) continue;
             
-            if(!isVisited.contains(state.acc + n) && state.acc + n <= y) {
-                q.add(new State(state.acc + n, state.ans + 1));
-            }
-            if(!isVisited.contains(state.acc * 2) && state.acc * 2 <= y) {
-                q.add(new State(state.acc * 2, state.ans + 1));
-            }
-            if(!isVisited.contains(state.acc * 3) && state.acc * 3 <= y) {
-                q.add(new State(state.acc * 3, state.ans + 1));
-            }
+            q.add(new State(state.acc + n, state.ans + 1));
+            q.add(new State(state.acc * 2, state.ans + 1));
+            q.add(new State(state.acc * 3, state.ans + 1));
         }
         
         return -1;
