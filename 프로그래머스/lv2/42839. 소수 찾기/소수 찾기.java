@@ -26,7 +26,7 @@ class Solution {
     public int solution(String numbers) {
         List<Integer> num = new ArrayList<>();
         for(int i = 0; i < numbers.length(); i++) {
-            num.add(Character.getNumericValue(numbers.charAt(i)));
+            num.add(numbers.toCharArray()[i] - '0');
         }
         Set<Integer> res = new HashSet<>();
         res = getPrimes(0, num);
