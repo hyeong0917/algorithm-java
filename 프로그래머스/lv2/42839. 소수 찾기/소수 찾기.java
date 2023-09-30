@@ -1,37 +1,28 @@
 import java.util.*;
 
 class Solution {
-    private Set<Integer> getPrimes(int acc, List<Integer> numbers) {
-        Set<Integer> primes = new HashSet<>();
-        if(isPrime(acc)) primes.add(acc);
-        
-        for(int i = 0; i < numbers.size(); i++) {
-            int nextAcc = acc * 10 + numbers.get(i);
-            List<Integer> nextNumbers = new ArrayList<>(numbers);
-            nextNumbers.remove(i);
-            primes.addAll(getPrimes(nextAcc, nextNumbers));
+    HashSet<Integer> numberSet = new HashSet<>();
+    public void recursive(String comb, String others) {
+        if(!comb.equals("") && isPrime(comb)) {
+            numberSet.add(Integer.valueOf(comb));
         }
-        return primes;
+        
+        for(int i = 0; i < others.length(); i++) {
+            recursive(comb + others.charAt(i), others.substring(0, i) + others.substring(i + 1));
+        }
     }
-    
-    //acc가 소수인지 검사하는 메서드 구현
-    private boolean isPrime(int n) {
-        if(n <= 1) return false;
-        for(int i = 2; i * i <= n; i++) {
-            if(n % i == 0) return false;
+    public boolean isPrime(String num) {
+        int number = Integer.valueOf(num);
+        if(number <= 1) return false;
+        for(int i = 2; i * i <= number; i++) {
+            if(number % i == 0) return false;
         }
         return true;
     }
-    
     public int solution(String numbers) {
-        List<Integer> num = new ArrayList<>();
-        for(int i = 0; i < numbers.length(); i++) {
-            num.add(numbers.toCharArray()[i] - '0');
-        }
-        Set<Integer> res = new HashSet<>();
-        res = getPrimes(0, num);
         int answer = 0;
-        answer = res.size();
+        recursive("", numbers);
+        answer = numberSet.size();
         return answer;
     }
 }
